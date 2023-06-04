@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const mongoURI =
-  "mongodb+srv://moody:Devkumar2612@cluster0.gdeuijt.mongodb.net/moody?retryWrites=true&w=majority";
+const key = process.env.REACT_APP_UserNamePassword;
+const mongoURI = `"mongodb+srv://moody:${key}@cluster0.gdeuijt.mongodb.net/moody?retryWrites=true&w=majority"`;
 
 const mongoDB = async () => {
   try {

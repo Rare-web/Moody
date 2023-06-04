@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
-const Order = require("../models/Orders").default;
+const Order = require("../models/Orders");
 router.post("/orderData", async (req, res) => {
   let data = req.body.order_data;
   await data.splice(0, 0, { Order_date: req.body.order_date });
@@ -10,7 +10,7 @@ router.post("/orderData", async (req, res) => {
   //if email not exisitng in db then create: else: InsertMany()
   let eId = await Order.findOne({ email: req.body.email }).exec();
 
-  console.log(eId);
+  // console.log(eId);
   if (eId === null) {
     try {
       //   console.log(data);
@@ -40,14 +40,14 @@ router.post("/orderData", async (req, res) => {
   }
 });
 
-// router.post("/myOrderData", async (req, res) => {
-//   try {
-//     console.log(req.body.email);
-//     let eId = await Order.findOne({ email: req.body.email });
-//     //console.log(eId)
-//     res.json({ orderData: eId });
-//   } catch (error) {
-//     res.send("Error", error.message);
-//   }
-// });
+router.post("/myOrderData", async (req, res) => {
+  try {
+    // console.log(req.body.email);
+    let eId = await Order.findOne({ email: req.body.email });
+    //console.log(eId)
+    res.json({ orderData: eId });
+  } catch (error) {
+    res.send("Error", error.message);
+  }
+});
 module.exports = router;
